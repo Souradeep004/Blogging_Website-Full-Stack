@@ -36,6 +36,7 @@ function updateNavigation() {
     const loginLink = document.getElementById('loginLink');
     const logoutLink = document.getElementById('logoutLink');
     const createLink = document.getElementById('createLink');
+    const createFab = document.getElementById('createFab');
     const profileLink = document.getElementById('profileLink');
 
     if (isAuthenticated()) {
@@ -45,6 +46,7 @@ function updateNavigation() {
             createLink.style.display = 'block';
             createLink.href = 'create.html';
         }
+        if (createFab) createFab.style.display = 'flex';
         if (profileLink) profileLink.style.display = 'block';
 
         // Add logout event listener
@@ -58,6 +60,7 @@ function updateNavigation() {
         if (loginLink) loginLink.style.display = 'block';
         if (logoutLink) logoutLink.style.display = 'none';
         if (createLink) createLink.style.display = 'none';
+        if (createFab) createFab.style.display = 'none';
         if (profileLink) profileLink.style.display = 'none';
     }
 }

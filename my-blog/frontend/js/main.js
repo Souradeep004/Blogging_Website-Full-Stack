@@ -141,3 +141,101 @@ if (searchInput) {
         }
     });
 }
+
+// --- Create Post Modal & FAB logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const createFab = document.getElementById('createFab');
+    const createModal = document.getElementById('createModal');
+    const createModalClose = document.getElementById('createModalClose');
+    const modalCancel = document.getElementById('modalCancel');
+    const createForm = document.getElementById('createPostModalForm');
+    const modalError = document.getElementById('modalError');
+    const modalSuccess = document.getElementById('modalSuccess');
+
+    // If user is authenticated, show the FAB (auth.js also updates navigation)
+    try {
+        if (typeof isAuthenticated === 'function' && isAuthenticated()) {
+            if (createFab) createFab.style.display = 'flex';
+        }
+    } catch (e) {
+        // ignore if auth.js not loaded
+    }
+
+    function openModal() {
+        if (createModal) {
+            createModal.style.display = 'flex';
+            createModal.setAttribute('aria-hidden', 'false');
+        }
+    }
+
+    function closeModal() {
+        if (createModal) {
+            createModal.style.display = 'none';
+            createModal.setAttribute('aria-hidden', 'true');
+        }
+        if (modalError) modalError.style.display = 'none';
+        if (modalSuccess) modalSuccess.style.display = 'none';
+        if (createForm) createForm.reset();
+    }
+
+    if (createFab) createFab.addEventListener('click', openModal);
+    if (createModalClose) createModalClose.addEventListener('click', closeModal);
+    if (modalCancel) modalCancel.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside content
+    if (createModal) {
+        createModal.addEventListener('click', (e) => {
+            if (e.target === createModal) closeModal();
+        });
+    }
+
+    if (createForm) {
+        createForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('modalTitle').value.trim();
+            const excerpt = document.getElementById('modalExcerpt').value.trim();
+            const category = document.getElementById('modalCategory').value;
+            const content = document.getElementById('modalContent').value.trim();
+
+            if (!title || !content || !category) {
+                if (modalError) {
+                    modalError.textContent = 'Please fill the required fields (title, category and content).';
+                    modalError.style.display = 'block';
+                }
+                return;
+            }
+
+            const postData = { title, excerpt, content, category, tags: [], readTime: '5 min read' };
+
+            try {
+                const token = (typeof getToken === 'function') ? getToken() : null;
+                const result = await api.createPost(postData, token);
+
+                if (result && result.success) {
+                    if (modalSuccess) {
+                        modalSuccess.textContent = 'Post created successfully!';
+                        modalSuccess.style.display = 'block';
+                        modalError.style.display = 'none';
+                    }
+                    // Refresh posts and close modal shortly
+                    setTimeout(() => {
+                        closeModal();
+                        loadPosts(currentCategory);
+                    }, 900);
+                } else {
+                    if (modalError) {
+                        modalError.textContent = (result && result.message) ? result.message : 'Failed to create post.';
+                        modalError.style.display = 'block';
+                    }
+                }
+            } catch (err) {
+                console.error('Create post error', err);
+                if (modalError) {
+                    modalError.textContent = 'Failed to create post. Please try again.';
+                    modalError.style.display = 'block';
+                }
+            }
+        });
+    }
+});
