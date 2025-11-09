@@ -69,9 +69,20 @@ exports.getPost = async (req, res) => {
 // @access  Private
 exports.createPost = async (req, res) => {
   try {
-    // Add user to req.body
-    req.body.author = req.user.id;
-    req.body.authorName = req.user.name;
+    // Add user to req.body. If no authenticated user (dev/open mode), create/find a Guest user
+    if (req.user) {
+      req.body.author = req.user.id;
+      req.body.authorName = req.user.name;
+    } else {
+      // Find or create a Guest user to associate with the post
+      const User = require('../models/User');
+      let guest = await User.findOne({ email: 'guest@local' });
+      if (!guest) {
+        guest = await User.create({ name: 'Guest', email: 'guest@local', password: Math.random().toString(36).slice(2, 10) });
+      }
+      req.body.author = guest._id;
+      req.body.authorName = guest.name;
+    }
 
     const post = await Post.create(req.body);
 
