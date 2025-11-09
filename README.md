@@ -1,1 +1,0 @@
-# Simple Blogging Website Project
