@@ -39,6 +39,9 @@
         <button class="category-btn" onclick="filterCategory('Business')">Business</button>
     </div>
 
+    <!-- Floating create post button (shown only when authenticated) -->
+    <button id="createFab" class="fab" title="Create Post" style="display: none;">+</button>
+
     <div class="container">
         <div id="loading">Loading posts...</div>
         <div class="posts-grid" id="postsGrid"></div>
@@ -47,6 +50,52 @@
     <footer>
         <p>&copy; 2025 MyBlog. All rights reserved. Built with ❤️</p>
     </footer>
+
+    <!-- Create Post Modal -->
+    <div id="createModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <span class="modal-close" id="createModalClose">&times;</span>
+            <h2>Create New Post</h2>
+
+            <div id="modalError" class="error-message" style="display:none;"></div>
+            <div id="modalSuccess" class="success-message" style="display:none;"></div>
+
+            <form id="createPostModalForm">
+                <div class="form-group">
+                    <label for="modalTitle">Title *</label>
+                    <input type="text" id="modalTitle" required maxlength="200">
+                </div>
+
+                <div class="form-group">
+                    <label for="modalExcerpt">Excerpt *</label>
+                    <textarea id="modalExcerpt" rows="2" required maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="modalCategory">Category *</label>
+                    <select id="modalCategory" required>
+                        <option value="">Select a category</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Food">Food</option>
+                        <option value="Business">Business</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="modalContent">Content *</label>
+                    <textarea id="modalContent" rows="8" required></textarea>
+                </div>
+
+                <div style="display:flex; gap:1rem; align-items:center;">
+                    <button type="submit" class="btn-primary">Publish</button>
+                    <button type="button" id="modalCancel" class="btn-secondary" style="background:#eee; border:1px solid #ddd;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
