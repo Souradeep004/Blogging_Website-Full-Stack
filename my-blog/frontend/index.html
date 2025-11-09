@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBlog - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📝 MyBlog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" id="createLink" style="display: none;">Create Post</a></li>
+                <li><a href="#" id="profileLink" style="display: none;">Profile</a></li>
+                <li><a href="login.html" id="loginLink">Login</a></li>
+                <li><a href="#" id="logoutLink" style="display: none;">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Welcome to MyBlog</h1>
+        <p>Discover amazing stories, insights, and ideas</p>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search articles...">
+            <button onclick="searchPosts()">Search</button>
+        </div>
+    </div>
+
+    <div class="categories">
+        <button class="category-btn active" onclick="filterCategory('all')">All</button>
+        <button class="category-btn" onclick="filterCategory('Technology')">Technology</button>
+        <button class="category-btn" onclick="filterCategory('Lifestyle')">Lifestyle</button>
+        <button class="category-btn" onclick="filterCategory('Travel')">Travel</button>
+        <button class="category-btn" onclick="filterCategory('Food')">Food</button>
+        <button class="category-btn" onclick="filterCategory('Business')">Business</button>
+    </div>
+
+    <div class="container">
+        <div id="loading">Loading posts...</div>
+        <div class="posts-grid" id="postsGrid"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MyBlog. All rights reserved. Built with ❤️</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
