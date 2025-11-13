@@ -1,0 +1,140 @@
+/* src/App.css (add this to the end) */
+
+/* --- Blog Post Page --- */
+.blog-post-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.blog-post-page .blog-category {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.blog-post-page .blog-post-title {
+  font-size: 2.8rem;
+  margin: 0.5rem 0 2rem 0;
+  color: #222;
+}
+
+.blog-post-page .blog-post-content {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.blog-post-page .blog-post-content p {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Make Read More button look like a button --- */
+.read-more-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+  text-decoration: none; /* Added for Link */
+}
+
+.read-more-btn:hover {
+  text-decoration: underline; /* Added for Link */
+}
+
+/* src/App.css (add this to the end) */
+
+.form-hint {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background-color: var(--app-bg);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* src/App.css (add this to the end) */
+
+/* --- New Upload Button Styles --- */
+.upload-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--app-bg);
+  border-radius: 8px;
+  border: 1px dashed var(--dark-blue);
+}
+
+/* This hides the default, ugly file input */
+input[type="file"] {
+  display: none;
+}
+
+/* This is the new, styled button (which is actually a label) */
+.custom-file-upload {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  background-color: var(--card-white);
+  border: 1px solid var(--dark-blue);
+  color: var(--dark-blue);
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: var(--dark-blue);
+  color: var(--card-white);
+}
+
+.upload-hint {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* --- Separator --- */
+.separator-text {
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 1.5rem 0 1rem 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* src/App.css (add this to the end) */
+
+/* This makes images from your Word doc responsive 
+  so they don't break the layout.
+*/
+.blog-post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional: makes them look nice */
+}
